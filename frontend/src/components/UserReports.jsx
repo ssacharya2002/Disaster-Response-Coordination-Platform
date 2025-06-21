@@ -66,7 +66,6 @@ function UserReports({ disasterId, currentUser: currentUserId }) {
       return;
     }
 
-    // Hardcoded user_id for now, as seen in other parts of the app.
     const reportData = { ...newReport, user_id: 1 };
 
     try {
