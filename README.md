@@ -12,6 +12,7 @@ A MERN stack app for real-time disaster management, integrating geospatial queri
 ## Features
 
 - **Disaster Data Management**: Robust CRUD for disaster records with audit trails and ownership.
+- **User Reports System**: User-submitted reports with admin verification capabilities.
 - **Location Extraction & Geocoding**: Uses Google Gemini API to extract locations from descriptions, then geocodes via Google Maps, or OpenStreetMap.
 - **Real-Time Social Media Monitoring**: Fetches and processes social media reports via Twitter API .
 - **Geospatial Resource Mapping**: Supabase geospatial queries to locate affected areas, shelters, and resources.
@@ -34,17 +35,37 @@ A MERN stack app for real-time disaster management, integrating geospatial queri
 
 ## API Endpoints
 
-- `POST /disasters` — Create disaster
-- `GET /disasters?tag=flood` — List disasters (filter by tag)
-- `PUT /disasters/:id` — Update disaster
-- `DELETE /disasters/:id` — Delete disaster
-- `GET /disasters/:id/social-media` — Social media reports
-- `GET /disasters/:id/resources?lat=...&lon=...` — Nearby resources (geospatial)
-- `GET /disasters/:id/official-updates` — Official updates
-- `POST /disasters/:id/verify-image` — Image verification (Gemini)
-- `POST /geocode` — Extract and geocode location
+### Disasters
+- `POST /api/disasters` — Create disaster
+- `GET /api/disasters?tag=flood` — List disasters (filter by tag)
+- `GET /api/disasters/:id` — Get disaster by ID
+- `PUT /api/disasters/:id` — Update disaster
+- `DELETE /api/disasters/:id` — Delete disaster
+- `GET /api/disasters/:id/official-updates` — Get official updates for disaster
+
+### Reports
+- `POST /api/reports/disasters/:id/reports` — Create user report for a disaster
+- `GET /api/reports/disasters/:id/reports` — Get all reports for a disaster
+- `PUT /api/reports/:id` — Update report verification status (admin only)
+
+### Social Media
+- `GET /api/social-media/disasters/:id/social-media` — Get social media posts for disaster
+- `GET /api/social-media/:id/social-media` — Fetch Twitter posts for disaster
+- `GET /api/social-media/mock-social-media` — Get mock social media data
+
+### Resources
+- `GET /api/resources/disasters/:id/resources?lat=...&lng=...&radius=...` — Get nearby resources for disaster
+- `POST /api/resources/disasters/:id/resources` — Create new resource for disaster
+- `DELETE /api/resources/disasters/:id/resources/:resourceId` — Delete resource
+
+### Image Verification
+- `POST /api/verification/disasters/:id/verify-image` — Verify disaster image using AI
+
+### Geocoding
+- `POST /api/geocode` — Extract and geocode location from text
 
 ---
+
 
 ## Database Schema
 
@@ -52,7 +73,6 @@ A MERN stack app for real-time disaster management, integrating geospatial queri
 - **reports**: id, disaster_id, user_id, content, image_url, verification_status, created_at
 - **resources**: id, disaster_id, name, location_name, location (GEOGRAPHY), type, created_at
 - **cache**: key, value (JSONB), expires_at
-
 
 ---
 
@@ -82,7 +102,6 @@ npm run dev
 ```
 
 ---
-
 
 ## Environment Variables
 
@@ -115,6 +134,7 @@ VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_access_token
 - Use the frontend to create/update disasters, submit reports, and view real-time updates.
 - Test all backend APIs via the frontend or tools like Postman.
 - Real-time updates are pushed via WebSockets.
+- **User Reports**: Navigate to any disaster detail page to submit and view user reports.
 
 ---
 
@@ -125,16 +145,18 @@ VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_access_token
   - Generate frontend buttons and forms
   - Write Supabase queries
   - Check code quality
-  - Generate API routes, caching logic, and WebSocket integration
+  - Caching logic, and WebSocket integration
   - Assist in mock social media logic
+  - Implement user reports system with admin verification
 
 ---
- 
+
 ## Notes
 
 - Mock data and endpoints are provided for testing.
 - API rate limits are handled with Supabase caching (TTL: 1 hour).
 - Used mock Twitter API due to access limits.
+- User reports require proper authentication for admin features.
 
 ---
 
