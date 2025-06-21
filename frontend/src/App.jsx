@@ -59,11 +59,11 @@ function App() {
     });
 
     newSocket.on("social_media_updated", (data) => {
-      addNotification(`New social media reports: ${data.count} posts`);
+      addNotification(`Social media reports updated`);
     });
 
     newSocket.on("resources_updated", (data) => {
-      addNotification(`Resources updated: ${data.message}`);
+      addNotification(`Resources updated`);
     });
 
     return () => newSocket.close();
