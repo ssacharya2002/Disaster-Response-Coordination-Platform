@@ -11,8 +11,9 @@ import {
 import { useParams } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
 import OfficialUpdates from "./OfficialUpdates";
+import UserReports from "./UserReports";
 
-const DisasterDetail = () => {
+const DisasterDetail = ({ currentUser: currentUserId }) => {
   const id = useParams().id || null;
   const [disasterDetail, setDisasterDetail] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,13 +22,15 @@ const DisasterDetail = () => {
   const mapContainer = useRef(null);
   const [resources, setResources] = useState([]);
 
-  // const [newResource, setNewResource] = useState({
-  //   name: "",
-  //   location_name: "",
-  //   type: "shelter",
-  //   lat: "",
-  //   lng: "",
-  // });
+  // Mock users object, similar to backend
+  const users = {
+    netrunnerX: { id: "netrunnerX", role: "admin" },
+    reliefAdmin: { id: "reliefAdmin", role: "admin" },
+    citizen1: { id: "citizen1", role: "contributor" },
+  };
+
+  const currentUser = users[currentUserId] || users["citizen1"];
+  const isAdmin = currentUser.role === "admin";
 
   const [coordinates, setCoordinates] = useState({
     lat: "40.7128",
@@ -192,7 +195,9 @@ const DisasterDetail = () => {
   };
 
   useEffect(() => {
-    if (id) fetchDisasterDetail();
+    if (id) {
+      fetchDisasterDetail();
+    }
   }, [id]);
 
   useEffect(() => {
@@ -463,6 +468,8 @@ const DisasterDetail = () => {
               : "No resources found for this disaster. use your location to find resources."}
           </div>
         </div>
+
+        <UserReports disasterId={id} currentUser={currentUserId} />
       </div>
     </div>
   );

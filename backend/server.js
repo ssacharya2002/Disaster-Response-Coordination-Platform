@@ -9,6 +9,7 @@ import geocodeRoutes from "./routes/geocode.js";
 import socialMediaRoutes from "./routes/socialMedia.js";
 import resourcesRoutes from "./routes/resources.js";
 import imageVerificationRoutes from "./routes/imageVerificationRoutes.js";
+import reportsRoutes from "./routes/reports.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/geocode", geocodeRoutes);
 app.use("/api/social-media", socialMediaRoutes);
 app.use("/api/resources", resourcesRoutes);
 app.use("/api/verification", imageVerificationRoutes);
+app.use("/api/reports", reportsRoutes);
 
 // Socket.io connection
 io.on("connection", (socket) => {

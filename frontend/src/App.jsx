@@ -1,5 +1,3 @@
- 
-
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import DisasterList from "./components/DisasterList";
@@ -175,7 +173,7 @@ function App() {
         />
         <Route
           path="/disasters/:id"
-          element={<DisasterDetail disasters={disasters} />}
+          element={<DisasterDetail disasters={disasters} currentUser={currentUser} />}
         />
         <Route
           path="/social"
