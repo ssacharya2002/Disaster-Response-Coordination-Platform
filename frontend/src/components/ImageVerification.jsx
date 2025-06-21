@@ -71,15 +71,15 @@ const ImageVerification = ({ apiBase, disasters, selectedDisaster }) => {
 
   const sampleImages = [
     {
-      url: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400",
+      url: "https://www.assamtimes.org/sites/default/files/styles/718x440/public/field/image/14-08-17%20Kaziranga-%20NH%2037%20under%20flood%20%281%29.jpg",
       description: "Flood scene",
     },
     {
-      url: "https://images.unsplash.com/photo-1574482620881-b5eb0eeae4cd?w=400",
+      url: "https://nawakara.com/wp-content/uploads/2022/12/profile-3121080017-01FJ1YT29TD80SE4C0B3JMKQP8.jpg",
       description: "Emergency response",
     },
     {
-      url: "https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=400",
+      url: "https://cdnuploads.aa.com.tr/uploads/Contents/2019/01/30/thumbs_b_c_0bd65f654aa9088aa3e7f41997cffea8.jpg",
       description: "Natural disaster",
     },
   ];
