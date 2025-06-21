@@ -132,6 +132,9 @@ export const createResource = async (req, res) => {
 
     if (error) throw error;
 
+    req.io.emit("resources_updated", { action: "create", resource: data });
+
+
     res.status(201).json({
       success: true,
       data,

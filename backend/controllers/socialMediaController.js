@@ -92,6 +92,10 @@ export const getSocialMediaPosts = async (req, res) => {
     };
 
     await CacheService.set(cacheKey, resultData, 60);
+    req.io.emit("social_media_updated", {
+      action: "update",
+      disaster: resultData.posts,
+    });
 
     res.json({
       success: true,
